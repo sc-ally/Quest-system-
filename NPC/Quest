@@ -1,0 +1,15 @@
+local npc = script.Parent
+local prompt = npc:FindFirstChild("ProximityPrompt")
+
+local questGoal = 3  -- Number of apples needed
+
+if prompt then
+    prompt.Triggered:Connect(function(player)
+        local remoteEvent = game.ReplicatedStorage:FindFirstChild("QuestEvent")
+        if remoteEvent then
+            remoteEvent:FireClient(player, "Collect 3 Apples!", questGoal)
+        else
+            warn("QuestEvent RemoteEvent not found in ReplicatedStorage")
+        end
+    end)
+end
